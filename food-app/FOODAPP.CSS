@@ -1,0 +1,209 @@
+
+
+
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-thumb{
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+}
+.Ingredent::-webkit-scrollbar-track{
+    background-color: rgb(0, 0, 0);
+}
+
+
+button{
+    cursor: pointer;
+}
+
+
+
+
+.Listofdish{
+  text-align: center;
+  place-items: center ;
+}
+.dishcard{
+  width: 200px;
+   height: 450px;
+   flex-direction: column;
+   background-color: rgb(106, 99, 99);
+   display: flex;
+   border: 5px solid  rgb(213, 209, 183);
+   transition: 0.2s;
+   margin: 5px;
+}
+
+.dishcard img{
+     width: 200px;
+     height: 280px;
+     border-radius: 8px;
+     
+    }
+    .dishcard .MealName{
+        font-size:20px;
+    }
+    .dishcard p{
+        font-size: 20px;
+    }
+.dishcard:hover{
+   cursor: grab;
+   border-top: 5px solid  rgba(12, 231, 30, 0.958);
+   border-left: 5px solid  rgba(12, 231, 30, 0.958);
+   border-right: 5px solid  rgba(12, 231, 30, 0.958);
+   border-bottom: 5px solid  rgba(12, 231, 30, 0.958);
+   background: linear-gradient(rgba(234, 187, 125, 0.5),rgba(198, 124, 20, 0.5));
+
+}
+.dishcard button{
+     font-size: 20px;
+     font-weight: 600;
+     padding: 10px;
+     border-radius: 5px;
+     cursor: pointer;
+     background-color:rgb(0, 131, 246); 
+     border: none;
+
+}
+.dishcard img:hover{
+    z-index: 0;
+}
+.recipiedetail{
+   display: none;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   background-color: burlywood;
+   border-radius:15px ;
+   width: 40%;
+   height: 50%;
+   padding: 10px;
+   transition: 0.5s ;
+   overflow: scroll;
+   
+}
+.recipeclose{
+    font-size: 20px;
+    background-color: rgba(255, 0, 0, 0.668);
+    color: white;
+    font-weight: 300%;
+}
+.MealName{
+    font-size: 30px;
+    border-bottom : 5px solid rgba(25, 25, 25, 0.527);
+}
+.Ingredents{
+    display: none;
+    height: 400px;
+    width: 600px;
+    background-color: rgba(0, 0, 0, 0.215);
+    position: fixed;
+    top:30%;
+    left: 30%;
+    border: 5px solid  rgb(0, 0, 0);
+}
+.IngredentContainer{
+    
+    height: 370px;
+    width: 600px;
+    overflow-y: scroll;
+}
+.IngredentSub{
+    margin-top: 50px;
+}
+.IngredentList{
+    align-items: center;
+    display: flex;
+}
+.FoodName{
+        font-size: 35px;
+        text-align: center;
+        color: rgb(162, 255, 0);
+        font-style: oblique;
+        background-color: rgba(37, 32, 32, 0.07);
+        position: absolute;
+        top:5px;
+        left: 50px;
+        border-bottom : 5px solid rgba(25, 25, 25, 0.527);
+        border-right : 5px solid rgba(25, 25, 25, 0.527);
+        border-left : 5px solid rgba(25, 25, 25, 0.527);
+    }
+.Ingredenthead{
+    font-size: 30px;
+    color: blue;
+    text-align: center;
+}
+.IngredentList ul{
+    font-size: 28px;
+    color: white;
+}
+.InstructionHead{
+    color: Blue;
+     font-size: 40px;
+}
+.InstuctionDetail{
+    color:white;
+}
+
+.IngredentList{
+    margin-top: 5px;
+}
+.closebtn{
+    height: 25px;
+    width: 25px;
+}
+.Link{
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.Link a{
+    color:Blue;
+}
+
+
+
+.Ingredents::-webkit-scrollbar{
+    width: 10px;
+}
+.Ingredents::-webkit-scrollbar-thumb{
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+}
+.Ingredents::-webkit-scrollbar-track{
+    background-color: rgba(0, 0, 0, 0.212);
+}
+footer{
+    background-color: rgba(0, 0, 0, 0.564);
+    padding: 2px;
+    text-align: center;
+    align-items: center;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.footerIcon{
+    color: rgb(0, 131, 246); 
+}
+@media (max-width:940px){
+     .searchheader nav{
+        display: grid;
+        grid-template-rows: auto;
+        text-align: center;
+        align-items: center;
+     }
+     .searchheader nav form input{
+        width: 300px;
+    }
+
+}
+@media (max-width:500px){
+    .searchheader nav form input{
+        width: 200px;
+    }
+ 
+}
