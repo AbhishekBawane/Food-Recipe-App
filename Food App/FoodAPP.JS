@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded',()=>{
 const searchbox = document.querySelector(".searchbox");
-const searchbutton = document.querySelector(".searchbutton");
+const btn = document.querySelector(".btn");
 const Listofdish = document.querySelector(".Listofdish");
 const Ingredents = document.querySelector(".Ingredents");
 const IngredentList= document.querySelector(".IngredentList");
-const closeBtn = document.querySelector(".closeBtn");
+const closebtn = document.querySelector(".closebtn");
 
 
 
@@ -18,10 +18,10 @@ const getRecipies =async(query) => {
              const dishdiv =document.createElement('div');
                    dishdiv.classList.add('dishcard');
                    dishdiv.innerHTML =  `
-                      <img src="${meal.strMealThumb}"/>
-                      <h3 class="MealName"><span>${meal.strMeal}</span></h3>
-                      <p class="MealArea"><span>${meal.strArea}</span></p>
-                      <p class="MealCategory">${meal.strCategory} </p> `
+                      <img class= 'w-100' src="${meal.strMealThumb}"/>
+                      <h3 class="MealName text-danger text-center p-0 m-0"><span>${meal.strMeal}</span></h3>
+                      <p class="MealArea m-0 p-0"><span>${meal.strArea}</span></p>
+                      <p class="MealCategory m-0 p-0">${meal.strCategory} </p> `
                          
                         
                         const button = document.createElement('button');
@@ -29,8 +29,9 @@ const getRecipies =async(query) => {
                         dishdiv.appendChild(button);
                         button.addEventListener(`click`,()=>{
                                  IngreList(meal);
-                        });                    
-                        
+                        });               data
+                         
+              
 
            
                
@@ -42,14 +43,15 @@ const getRecipies =async(query) => {
 
     const IngreList = (meal) =>{
        IngredentList.innerHTML=`
-                      <h1 class="FoodName" >${meal.strMeal}</h1>
-                      <div class="IngredentContainer">
+                      <h1 class="FoodName w-auto " >${meal.strMeal}</h1>
+                      <div class="IngredentContainer ">
                       <div class="IngredentSub">
                       <h3 class="Ingredenthead">Ingredent List:-<h3>
-                      <ul>${fetchIngredents(meal)}</ul>
+                      <ul class=text-start>${fetchIngredents(meal)}</ul>
                       <div Class="Instruction">
                       <h3 class="InstructionHead"> Instructions:-</h3>
                       <p class="InstuctionDetail">${meal.strInstructions}</p>
+                      <p class="Link">Link:-<a href="${meal.strYoutube}" class="">Watch Video</a></p>
                       </div>
                       </div>
                       </div>
@@ -75,12 +77,12 @@ const getRecipies =async(query) => {
     }
     
 
-closeBtn.addEventListener('click', (e) =>{
+closebtn.addEventListener('click', (e) =>{
    e.preventDefault();
      Ingredents.style.display="none"
 });
 
-searchbutton.addEventListener ('click', (e) => {
+btn.addEventListener ('click', (e) => {
    e.preventDefault();
    const search = searchbox.value  .trim();
    getRecipies(search);

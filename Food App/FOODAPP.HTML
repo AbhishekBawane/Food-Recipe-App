@@ -5,37 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food App</title>
     <link rel="stylesheet" href="FOODAPP.CSS">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <Script src="FoodAPP.JS"></Script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </head>
-<body>
-    <header class="searchheader">
-     <nav>
-        <h1>Food Recipe App</h1>
-        <form >
-            <input type="text" placeholder="Search For Recipies..." class="searchbox"/>
-            <button type="submit" class="searchbutton">Search </button>
+<body class="bg-black m-0 p-0" >
+    
+     <nav class="d-flex position-fixed top-0 bg-dark w-100  h-auto d-flex justify-content-between align-items-center">
+        <h1 class="text-info position-relative ms-2">Food Recipe App</h1>
+        <form  class="me-2  d-flex flex-row">
+            <input type="text" placeholder="Search For Recipies..." class="searchbox me-1 fs-4 fw-100 text-start rounded text-black align-middle bg-white p-1" style="width: 400px;"/>
+            <button type="submit" class="btn btn-info fs-4 ps-1 pe-1 text-center text-white p-0">Search </button>
         </form>
      </nav>
-    </header>
-    <main>
-        <section>
-            <div class="Headline">
-                <h1>Explore <span>Foods Recipes </span></h1> 
+    
+
+        <section class="section w-100 text-center bg-dark mt-5">
+            <div class="Headline mb-2 w-100 h-100 bg-dark">
+                <h1 class="fs-1 fw-100 text-info mb-2 mt-2">Explore <span class="text-secondary">Foods Recipes </span></h1> 
             </div>
-            <div class="Listofdish">
+            <div class="Listofdish text-center  row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4 justify-content-center">
             </div>
             <div class="Ingredents">
-               <header> <button type="button" class="closeBtn">X</button><header>
+               <button type="button" class="closebtn position-absolute top-0 start-0 bg-danger rounded fs-4 p-1" >X</button>
                <div class="IngredentList"></div>
             </div>
         </section>
-    </main>
-    <footer class="footer" >
-        <div class="footerText"><p>Copyright &copy; All Right Reserved by Abhishek Bawane</p></div>
-        <div class="footerIcon"><a href="#searchheader" class="button"><i class='bx bxs-home-alt-2'></i></a></div>
+    <footer class="footer position-fixed bottom-0 w-100 bg-dark" >
+        <div class="footerText text-info"><p>Copyright &copy; All Right Reserved by Abhishek Bawane</p></div>
+        <div class="footerIcon text-white"><a href="#searchheader" class="button"><i class='bx bxs-home-alt-2'></i></a></div>
     </footer>
 </body>
 </html>
