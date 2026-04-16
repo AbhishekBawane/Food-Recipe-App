@@ -1,91 +1,112 @@
-document.addEventListener('DOMContentLoaded',()=>{
-const searchbox = document.querySelector(".searchbox");
-const btn = document.querySelector(".btn");
-const Listofdish = document.querySelector(".Listofdish");
-const Ingredents = document.querySelector(".Ingredents");
-const IngredentList= document.querySelector(".IngredentList");
-const closebtn = document.querySelector(".closebtn");
+document.addEventListener("DOMContentLoaded", () => {
 
+  const searchbox = document.querySelector(".searchbox");
+  const btn = document.querySelector(".btn");
+  const Listofdish = document.querySelector(".Listofdish");
+  const IngredentList = document.querySelector(".IngredentList");
 
+  const modal = new bootstrap.Modal(document.getElementById("recipeModal"));
 
-const getRecipies =async(query) => {
-   Listofdish.innerHTML = "Fetching Recipe...";
-   const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
-   const response = await data.json();
-   
-       Listofdish.innerHTML =""; 
-            response.meals.forEach(meal =>{
-             const dishdiv =document.createElement('div');
-                   dishdiv.classList.add('dishcard');
-                   dishdiv.innerHTML =  `
-                      <img class= 'w-100' src="${meal.strMealThumb}"/>
-                      <h3 class="MealName text-danger text-center p-0 m-0"><span>${meal.strMeal}</span></h3>
-                      <p class="MealArea m-0 p-0"><span>${meal.strArea}</span></p>
-                      <p class="MealCategory m-0 p-0">${meal.strCategory} </p> `
-                         
-                        
-                        const button = document.createElement('button');
-                        button.textContent= "View Recipe";
-                        dishdiv.appendChild(button);
-                        button.addEventListener(`click`,()=>{
-                                 IngreList(meal);
-                        });               data
-                         
-              
+  // LOAD DEFAULT
+  const loadDefaultMeals = async () => {
+    Listofdish.innerHTML = "Loading...";
 
-           
-               
-                  
-                  Listofdish.appendChild(dishdiv);
-                        });
-                     }
-                    
+    let meals = [];
 
-    const IngreList = (meal) =>{
-       IngredentList.innerHTML=`
-                      <h1 class="FoodName w-auto " >${meal.strMeal}</h1>
-                      <div class="IngredentContainer ">
-                      <div class="IngredentSub">
-                      <h3 class="Ingredenthead">Ingredent List:-<h3>
-                      <ul class=text-start>${fetchIngredents(meal)}</ul>
-                      <div Class="Instruction">
-                      <h3 class="InstructionHead"> Instructions:-</h3>
-                      <p class="InstuctionDetail">${meal.strInstructions}</p>
-                      <p class="Link">Link:-<a href="${meal.strYoutube}" class="">Watch Video</a></p>
-                      </div>
-                      </div>
-                      </div>
-                      `
-           Ingredents.style.display="block"
-         }
- 
-
-
- const fetchIngredents=(meal)=>{
-   let Ilist = "";
-   console.log(meal);
-   for (i=1;i<=20;i++ ){
-    const ingre = meal[`strIngredient${i}`];
-    if(ingre){
-           const measure = meal[`strMeasure${i}`]; 
-           Ilist += `<li>${measure} ${ingre}</li>`
-    }else{
-       break;
-      }
+    for (let i = 0; i < 6; i++) {
+      const res = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
+      const data = await res.json();
+      meals.push(data.meals[0]);
     }
-    return Ilist;
+
+    renderMeals(meals);
+  };
+
+  // SEARCH
+  const getMeals = async (query) => {
+    Listofdish.innerHTML = "Searching...";
+
+    const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
+    const data = await res.json();
+
+    if (!data.meals) {
+      Listofdish.innerHTML = "No results 😢";
+      return;
     }
-    
 
-closebtn.addEventListener('click', (e) =>{
-   e.preventDefault();
-     Ingredents.style.display="none"
+    renderMeals(data.meals);
+  };
+
+  // RENDER
+  const renderMeals = (meals) => {
+    Listofdish.innerHTML = "";
+
+    meals.forEach(meal => {
+      const col = document.createElement("div");
+      col.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+
+      col.innerHTML = `
+        <div class="card bg-secondary text-white h-100">
+          <img src="${meal.strMealThumb}" class="card-img-top">
+          <div class="card-body d-flex flex-column">
+            <h6 class="MealName">${meal.strMeal}</h6>
+            <p class="mb-1">${meal.strArea}</p>
+            <p>${meal.strCategory}</p>
+            <button class="btn btn-info mt-auto">View Recipe</button>
+          </div>
+        </div>
+      `;
+
+      col.querySelector("button").addEventListener("click", () => {
+        showRecipe(meal);
+      });
+
+      Listofdish.appendChild(col);
+    });
+  };
+
+  // SHOW RECIPE
+  const showRecipe = (meal) => {
+    IngredentList.innerHTML = `
+      <h4>${meal.strMeal}</h4>
+      <h5>Ingredients</h5>
+      <ul>${getIngredients(meal)}</ul>
+      <h5>Instructions</h5>
+      <p>${meal.strInstructions}</p>
+      <a href="${meal.strYoutube}" target="_blank">▶ Watch Video</a>
+    `;
+
+    modal.show();
+  };
+
+  // INGREDIENTS
+  const getIngredients = (meal) => {
+    let list = "";
+
+    for (let i = 1; i <= 20; i++) {
+      const ing = meal[`strIngredient${i}`];
+      if (!ing) break;
+
+      const measure = meal[`strMeasure${i}`];
+      list += `<li>${measure} ${ing}</li>`;
+    }
+
+    return list;
+  };
+
+  // SEARCH
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const query = searchbox.value.trim();
+
+    if (!query) {
+      loadDefaultMeals();
+      return;
+    }
+
+    getMeals(query);
+  });
+
+  loadDefaultMeals();
 });
-
-btn.addEventListener ('click', (e) => {
-   e.preventDefault();
-   const search = searchbox.value  .trim();
-   getRecipies(search);
-});
-
-})
